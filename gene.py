@@ -42,8 +42,8 @@ def create_individual(data):
 
 def crossover(parent_1, parent_2):
     index = random.randrange(1, len(parent_1) - 1)
-    child_1 = np.concatenate(parent_1[index:], parent_2[:index])
-    child_2 = np.concatenate(parent_1[:index], parent_2[index:])
+    child_1 = np.append(parent_1[index:], parent_2[:index])
+    child_2 = np.append(parent_1[:index], parent_2[index:])
     return child_1, child_2
 
 

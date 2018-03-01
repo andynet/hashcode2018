@@ -24,5 +24,17 @@ def main():
     return vstup
 
 
+def converter(insert, data):
+    cars = dict()
+
+    for i in range(1, insert.F + 1):
+        cars[i] = []
+
+    for i in range(len(data)):
+        cars[data[i]].append(i + 1)
+    
+    return cars
+
+
 if __name__ == "__main__":
     main()
