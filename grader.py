@@ -1,17 +1,16 @@
 import numpy as np
 from sys import stdin
-
+import operator
 
 def rate(insert, solution):
     # [.... ]
     # indexy
     total = 0
     for car in solution.keys():
-        score = carScore(solution[car])
-        if score == 0:
+        score = carScore(solution[car], insert)
+        if score == -1:
             return 0
         total += score
-
     return total
 
 
@@ -20,19 +19,24 @@ def rate(insert, solution):
 #chybaju bonusi
 def carScore(car, insert):
     score = 0
-    sorted(car, cmp= lambda x,y: x[4] < y[4])
+    car.sort(key=operator.itemgetter(4))
     if not checkTimeSorted(car):
-        return 0
-    
+        return -1
     for i in range(len(car)):
         score += distance(car[i])
+    return score
 
 def checkTimeSorted(car):
     for i in range(len(car)-1):
+        #if len(car) > 1:
+            #print(car)
+            #print("hahahasdhahsdhasdhahsdhahsd")
         if car[i][5] > car[i+1][4]:
+            #print("zly cas")
             return False
                 
-        if ride1to2Distaces(car[i], car[i+1]) > (car[i][5] - car[i+1][4])
+        if ride1to2Distaces(car[i], car[i+1]) > (car[i+1][4] - car[i][5]):
+            #print("nesedi vzialenost")
             return False
     return True
 

@@ -3,7 +3,7 @@ import random
 import sys
 import numpy as np
 import parser
-
+import grader
 
 
 
@@ -19,13 +19,13 @@ class Debug(pyeasyga.GeneticAlgorithm):
         super(Debug, self).create_next_generation()
 
 
-if len(sys.argv) < 4:
-    print("Usage: %s <file> <population> <generations>" % sys.argv[0])
+if len(sys.argv) < 3:
+    print("Usage: %s <population> <generations>" % sys.argv[0])
     sys.exit(0)
 
-data = parser.main()
-population = int(sys.argv[2])
-generation = int(sys.argv[3])
+data = parser.parse()
+population = int(sys.argv[1])
+generation = int(sys.argv[2])
 
 
 
@@ -49,12 +49,15 @@ def crossover(parent_1, parent_2):
 
 def mutate(individual):
     global data
+    #if np.sum(individual) > 0:
+    #    print(individual)
     index = random.randrange(len(individual))
-    individual[index] = random.randrange(0, data.F)
+    individual[index] = random.randrange(0, data.F + 1)
     
 
 def fitness(individual, data):
-    pass
+    conv_ind, x = parser.converter(data, individual)
+    return grader.rate(data, conv_ind) 
 
 
 ga.fitness_function = fitness
@@ -67,7 +70,14 @@ ga.mutate_function = mutate
 
 ga.run()
 
-print(ga.best_individual())
+
+
+best = ga.best_individual()
+print(best)
+
+x, best = parser.converter(data, best[1])
+print(best)
+parser.vystupConverted(best)
 
 
 

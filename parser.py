@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class Vstup:
     def __init__(self, R,C,F,N,B,T,rides):
         self.R = R
@@ -25,14 +26,27 @@ def parse():
 
 
 def converter(insert, data):
+    cars_indexy = dict()
     cars = dict()
-
     for i in range(1, insert.F + 1):
         cars[i] = []
+        cars_indexy[i] = []
 
     for i in range(len(data)):
-        cars[data[i]].append(i + 1)
+        if data[i] ==0:
+            continue
+        cars[data[i]].append(insert.rides[i])
+        cars_indexy[data[i]].append(i)
     
-    return cars
+    return cars, cars_indexy
 
+def vystupConverted(data):
+    f = open('out.txt', 'w')
+    for i in range(len(data.keys())):
+        f.write("%d" % len(data[i + 1]))
+        for a in data[i + 1]:
+            print(a)
+            f.write(" %d" % a)
+        f.write("\n")
+    f.close()
 
