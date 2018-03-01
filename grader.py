@@ -36,8 +36,8 @@ def checkTimeSorted(car):
             return False
                 
         if ride1to2Distaces(car[i], car[i+1]) > (car[i+1][4] - car[i][5]):
-            #print("nesedi vzialenost")
-            return False
+            if (ride1to2Distaces(car[i], car[i+1]) + distance(car[i+1])) > (car[i+1][5] - car[i][5]):
+                return False
     return True
 
 
