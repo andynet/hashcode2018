@@ -11,7 +11,7 @@ class Vstup:
         self.rides = rides
 
 
-def main():
+def parse():
     R,C,F,N,B,T = map(int, input().split())
 
     rides = []
@@ -36,5 +36,3 @@ def converter(insert, data):
     return cars
 
 
-if __name__ == "__main__":
-    main()
