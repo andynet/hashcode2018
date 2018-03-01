@@ -2,7 +2,7 @@ from pyeasyga import pyeasyga
 import random
 import sys
 import numpy as np
-
+import parser
 
 
 
@@ -18,20 +18,12 @@ class Debug(pyeasyga.GeneticAlgorithm):
         print("NextGeberation %d" % self._i)
         super(Debug, self).create_next_generation()
 
-def load_data(model):
-    data = []
-    for cache in range(model._numCaches):
-        for video in range(model._numVideos):
-            data.append({'video':video, 'cache':cache})
-    return data
-
-
 
 if len(sys.argv) < 4:
     print("Usage: %s <file> <population> <generations>" % sys.argv[0])
     sys.exit(0)
 
-data = []
+data = parser.main()
 population = int(sys.argv[2])
 generation = int(sys.argv[3])
 
