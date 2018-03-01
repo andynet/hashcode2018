@@ -51,8 +51,9 @@ def mutate(individual):
     global data
     #if np.sum(individual) > 0:
     #    print(individual)
-    index = random.randrange(len(individual))
-    individual[index] = random.randrange(0, data.F + 1)
+    for i in range(len(individual)//10):
+        index = random.randrange(len(individual))
+        individual[index] = random.randrange(0, data.F + 1)
     
 
 def fitness(individual, data):
